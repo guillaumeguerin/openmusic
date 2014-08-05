@@ -29,81 +29,51 @@ Ext.define('openmusic.view.main.Main', {
 			layout: 'border',
 			items: [
 				{
-					xtype: 'toolbar',
-					region: 'center',
-					height: 40,
-					items: [{
-						xtype: 'button',
-						text: 'Home',
-						icon: 'app/images/icon/Home.ico',
-					},
-					{
-						xtype: 'button',
-						text: 'Save',
-						icon: 'app/images/icon/Save.ico',
-					},
-					{
-						xtype: 'button',
-						text: 'Song Properties',
-						icon: 'app/images/icon/Notes.ico',
-					},
-					// begin using the right-justified button container
-					'->', // same as { xtype: 'tbfill' }
-					{
-						xtype: 'button',
-						text: 'Download',
-						icon: 'app/images/icon/Download.ico',
-					}],
+					xtype: 'toolbarpanel',
 				},
 				{
 					xtype: 'panel',
 					region: 'east',
 					width: 200,
-					html: '<img src="app/images/icon/facebook-icon.png" style="padding-top: 8px; padding-left: 5px"></img>   <img src="app/images/icon/twitter-icon.png" style="padding-top: 8px; padding-left: 5px"></img>   <img src="app/images/icon/pinterest-icon.png" style="padding-top: 8px; padding-left: 5px"></img>   <img src="app/images/icon/mail-icon.png" style="padding-top: 8px; padding-left: 5px"></img>',
+					html: '<div style="padding-bottom:10px"> <div class="fb-share-button" data-href="http://publicmelody.com/"></div> <a href="https://twitter.com/share" class="twitter-share-button"><img src="app/images/icon/twitter-icon.png" style="padding-top: 8px; padding-left: 5px"></img></a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script>  <a href="//fr.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.publicmelody.com%2F&media=http%3A%2F%2Ffarm8.staticflickr.com%2F7027%2F6851755809_df5b2051c9_z.jpg&description=Take%20a%20look%20at%20my%20new%20project%20on%20publicmelody.com%20!" data-pin-do="buttonPin" data-pin-config="above" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a> <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script> <img src="app/images/icon/mail-icon.png" style="padding-top: 8px; padding-left: 5px"></img></div>',
 				}
 			]
 		},
 		{
 		title: 'Sound Bank',
-        region: 'west',
-        width: 250,
-        split: true,
-        tbar: [
-		{ 
-			xtype    : 'textfield',
-            name     : 'field1',
-            emptyText: 'enter search term'
-		},
-		{
-            text: 'Search',
-            handler: 'onClickButton'
-        },
-		],
-		items: [{
-			xtype: 'treepanel',
-			plugins: ['treeviewdragdrop'],
-			rootVisible: false,
-			root: {
-			expanded: true,
-			children: [
-				{ text: "Guitar", leaf: true },
-				{ text: "Piano", expanded: true, children: [
-					{ text: "Grand Piano", leaf: true },
-					{ text: "Rhodes", leaf: true}
-				] },
-				{ text: "Violin", leaf: true }
-			]
+		region: 'west',
+		width: 250,
+		split: true,
+		layout: 'border',
+		tbar: [
+			{ 
+				xtype    : 'textfield',
+				name     : 'field1',
+				emptyText: 'enter search term'
 			},
-		}],
-    },{
+			{
+		    		text: 'Search',
+		    		handler: 'onClickButton'
+			},
+			],
+			items: [{
+				xtype: 'soundtree',
+				},
+				{
+				xtype: 'sounduploader',
+				}
+			],
+	    },{
         region: 'center',
         xtype: 'tabpanel',
         items:[{
-            title: 'Composition',
+            title: 'Composition View',
 			border: true,
 			items: [{
 					xtype: 'tracksong',
 					height: 100,
+					controller: 'tracksong',
+					
 				},
 				{
 					xtype: 'panel',
@@ -111,7 +81,7 @@ Ext.define('openmusic.view.main.Main', {
 				}
 			],
         },{
-            title: 'DJ Mix',
+            title: 'Mixing View',
             html: '<h2>This is the DJ view.</h2>'
         }
 		]
